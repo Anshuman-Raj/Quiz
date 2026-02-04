@@ -2,19 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:quiz/result_screen.dart';
 
 class QuestionScreen extends StatefulWidget {
-  final VoidCallback? restartQuiz;
 
-  const QuestionScreen({super.key, this.restartQuiz});
+
+  const QuestionScreen({super.key});
 
   @override
   State<QuestionScreen> createState() {
-    return _QuestionScreenState(restartQuiz: restartQuiz);
+    return _QuestionScreenState();
   }
 }
 
 class _QuestionScreenState extends State<QuestionScreen> {
-  final VoidCallback? restartQuiz; 
-  _QuestionScreenState({this.restartQuiz});
   var currentQuestionIndex = 0;
   final List<String> questions = [
       'What is the capital of France?',
@@ -41,7 +39,13 @@ class _QuestionScreenState extends State<QuestionScreen> {
   Widget build(BuildContext context) {
     if (currentQuestionIndex >= questions.length) {
       // Quiz is over, show results
-      return ResultScreen(score: score, totalQuestions: questions.length, selectedAnswers: selectedAnswers, onRestartQuiz: restartQuiz ?? () {});
+      return ResultScreen(score: score, totalQuestions: questions.length, selectedAnswers: selectedAnswers, onRestartQuiz: () {
+        setState(() {
+          currentQuestionIndex = 0;
+          score = 0;
+          selectedAnswers = [];
+        });
+      });
     }
     else{
     List<Widget> children = [

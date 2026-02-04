@@ -19,20 +19,10 @@ class _QuizState extends State<Quiz> {
     // Logic to start the quiz can be added here
     setState(() {
       // Update state to show question screen
-      _screenChild = QuestionScreen(restartQuiz: _restartQuiz);
+      _screenChild = QuestionScreen();
     });
   }
 
-  // void _answerQuestion() {
-  //   // Logic to handle answering a question can be added here
-  // }
-
-  void _restartQuiz() {
-    // Logic to restart the quiz can be added here
-    setState(() {
-      _screenChild = null;
-    });
-  }
 
   
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz/detailed_results.dart';
 
 class ResultScreen extends StatelessWidget {
   final int score;
@@ -41,22 +42,20 @@ class ResultScreen extends StatelessWidget {
       final yourAnswer = entry['answer'] ?? 'No answer';
       final correct = entry['correct'] ?? 'N/A';
       children.add(
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 4.0),
-          child: Text(
-            'Q: $question\nYour Answer: $yourAnswer\nCorrect Answer: $correct',
-            style: const TextStyle(fontSize: 16, color: Colors.white),
-          ),
-        ),
+        DetailedResults(question: question, yourAnswer: yourAnswer, correct: correct),
       );
     }
     children.add(SizedBox(height: 30));
     children.add(restartButton);
     
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: children,
+    return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: children,
+      ),
     );
   }
 }
